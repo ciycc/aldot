@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table
+      border="0"
+      cell-spacing="0"
+      cell-padding="0"
+      style="
+        background: #fff;
+        margin: 0 auto;
+        border: 0;
+        padding: 0;
+        width: 660px;
+        font: 16px 'Malgun Gothic', 'Apple SD Gothic Neo', 'Nanum Gothic', '돋움', 'Dotum',
+          sans-serif;
+        font-weight: 500;
+        letter-spacing: -0.031em;
+      "
+      border-top:
+      4px
+      solid
+      #fc6969;
+    >
+      <tr>
+        <td>
+          <div class="contents" style="padding: 28px 32px 60px; margin: 0">
+            <div>
+              <img
+                src="data:image/png;base64,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"
+                alt=""
+              />
+            </div>
+            <div style="color: #222; font-size: 22px; font-weight: 700; margin: 32px 0 0">
+              알뜰폰 요금제 비교 플랫폼, 알닷
+            </div>
+            <div style="margin: 16px 0 40px">
+              고객의 기대만큼 고객의 믿음만큼<br />
+              고객이 신뢰하는 알닷이 되겠습니다.
+            </div>
+            <div>
+              <img
+                src="https://uplusmvno-gules.vercel.app/images/roaming/email/email-template-img-2-1.png"
+                alt=""
+              />
+            </div>
+            <div style="margin-top: 12px">
+              <span style="font-size: 12px; color: #66707a"
+                >보안된 E-MAIL이 정상적으로 열리지 않으면 우측의 “Click” 버튼을 눌러주세요.</span
+              >
+              <button
+                style="
+                  height: 24px;
+                  border-radius: 6px;
+                  border: 1px solid #dce0e5;
+                  background: #fff;
+                  font-size: 12px;
+                "
+              >
+                Click
+              </button>
+            </div>
+          </div>
+          <div
+            style="
+              color: #717171;
+              font-size: 12px;
+              background: #f8f8f8;
+              padding: 32px;
+              letter-spacing: -0.05em;
+            "
+          >
+            <div>
+              <div>
+                본 메일은 발신전용 입니다. 궁금하신 점이나 불편하신 사항은
+                <a
+                  href="#"
+                  style="
+                    font-weight: bold;
+                    color: #000;
+                    text-decoration: none;
+                    border-bottom: 1px solid #000;
+                  "
+                  >1:1 문의하기</a
+                >를 통해 문의하여 주시기 바랍니다.
+              </div>
+              <div style="margin-top: 9px">⁠답변 가능시간 : 평일 오전 9시 ~ 오후 6시</div>
+            </div>
+            <div style="margin-top: 22px">
+              <div>
+                <span>⁠서울특별시 용산구 한강대로 32</span>
+                <span
+                  style="
+                    color: #dddddd;
+                    font-size: 10px;
+                    padding: 0 4px;
+                    position: relative;
+                    top: -1px;
+                  "
+                  >|</span
+                >
+                <span>㈜엘지유플러스</span>
+                <span
+                  style="
+                    color: #dddddd;
+                    font-size: 10px;
+                    padding: 0 4px;
+                    position: relative;
+                    top: -1px;
+                  "
+                  >|</span
+                >
+                <span>사업자등록번호 220-81-39938</span>
+                <span
+                  style="
+                    color: #dddddd;
+                    font-size: 10px;
+                    padding: 0 4px;
+                    position: relative;
+                    top: -1px;
+                  "
+                  >|</span
+                >
+                <span>대표자 홍범식</span>
+              </div>
+              <div style="margin-top: 9px">⁠Copyright © LG Uplus Corp. All Rights Reserved.</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
