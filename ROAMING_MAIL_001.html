@@ -2,16 +2,125 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="telephone=no" />
     <title>해외 로밍 서비스 이용내역 청구내역</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      caption {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+      }
+
+      .wrap {
+        padding: 32px 60px 60px 60px;
+        max-width: 640px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+      .wrap h1 {
+        text-align: right;
+        margin: 0 0 40px;
+      }
+
+      /* print-head */
+      .print-head .date {
+        margin: 0 0 6px 0;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 19px;
+        letter-spacing: -0.5;
+        color: #66707a;
+      }
+      .print-head .tit {
+        margin: 0 0 28px 0;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 38px;
+        letter-spacing: -0.5px;
+      }
+      /* // print-head */
+
+      /* round-box */
+      .print-body .round-box {
+        margin: 0 0 32px 0;
+        padding: 40px;
+        border-radius: 12px;
+        background-color: #fcf2ed;
+      }
+      .print-body .round-box table {
+        width: 100%;
+      }
+      .print-body .round-box table th {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.5px;
+        text-align: left;
+      }
+      .print-body .round-box table td {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        letter-spacing: -0.5px;
+        text-align: left;
+      }
+      .print-body .round-box table tr:not(:last-child) th {
+        padding: 0 0 12px;
+      }
+      .print-body .round-box table tr:not(:last-child) td {
+        padding: 0 0 12px;
+      }
+      /* // round-box */
+
+      /* con-box */
+      .print-body .con-box .tit {
+        margin: 0 0 16px 0;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 22px;
+        letter-spacing: -0.5px;
+      }
+      .print-body .con-box table {
+        margin: 0 0 42px 0;
+        width: 100%;
+        border-top: 2px solid #000;
+      }
+      .print-body .con-box table thead th {
+        padding: 6px 0;
+        color: #66707a;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.5px;
+        border-bottom: 1px solid #dce0e5;
+      }
+      .print-body .con-box table tbody td {
+        padding: 12px 0;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.5px;
+        text-align: center;
+        border-bottom: 1px solid #dce0e5;
+      }
+      .print-body .con-box table tbody tr:last-child td {
+        font-weight: 700;
+      }
+      /* // con-box */
+    </style>
   </head>
-  <body style="margin: 0; padding: 0">
+  <body>
     <!-- wrap -->
-    <div
-      class="wrap"
-      style="padding: 32px 60px 60px 60px; width: 640px; margin: 0 auto; box-sizing: border-box"
-    >
-      <h1 style="text-align: right; margin: 0 0 40px">
+    <div class="wrap">
+      <h1>
         <img
           src="data:image/png;base64,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"
           alt="알닷"
@@ -20,449 +129,94 @@
 
       <!-- head -->
       <div class="print-head">
-        <p
-          style="
-            margin: 0 0 6px 0;
-            font-size: 13px;
-            font-weight: 500;
-            line-height: 19px;
-            letter-spacing: -0.5;
-            color: #66707a;
-          "
-          class="date"
-        >
-          발행일 : 2025.04.12 15:26:30
-        </p>
-        <h2
-          style="
-            margin: 0 0 28px 0;
-            font-size: 32px;
-            font-weight: 700;
-            line-height: 38px;
-            letter-spacing: -0.5px;
-          "
-          class="tit"
-        >
-          해외 로밍 서비스 이용내역 청구내역
-        </h2>
+        <p class="date">발행일 : 2025.04.12 15:26:30</p>
+        <h2 class="tit">해외 로밍 서비스 이용내역 청구내역</h2>
       </div>
       <!-- // head -->
 
       <!-- body -->
       <div class="print-body">
-        <div
-          class="round-box"
-          style="margin: 0 0 32px 0; padding: 40px; border-radius: 12px; background-color: #fcf2ed"
-        >
-          <table style="width: 100%">
+        <div class="round-box">
+          <table>
             <colgroup>
               <col width="30%" />
               <col width="*" />
             </colgroup>
-            <caption
-              style="
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                margin: -1px;
-                clip: rect(0 0 0 0);
-                overflow: hidden;
-              "
-            >
+            <caption>
               해외 로밍 서비스 이용내역 청구내역의 고객 정보
             </caption>
 
             <tbody>
               <tr>
-                <th
-                  style="
-                    padding: 0 0 12px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  고객명
-                </th>
-                <td
-                  style="
-                    padding: 0 0 12px;
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  홍*동
-                </td>
+                <th>고객명</th>
+                <td>홍*동</td>
               </tr>
               <tr>
-                <th
-                  style="
-                    padding: 0 0 12px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  사용 기간
-                </th>
-                <td
-                  style="
-                    padding: 0 0 12px;
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  2024.07.12~2024.07.24
-                </td>
+                <th>사용 기간</th>
+                <td>2024.07.12~2024.07.24</td>
               </tr>
               <tr>
-                <th
-                  style="
-                    padding: 0 0 12px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  방문 국가
-                </th>
-                <td
-                  style="
-                    padding: 0 0 12px;
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  태국
-                </td>
+                <th>방문 국가</th>
+                <td>태국</td>
               </tr>
               <tr>
-                <th
-                  style="
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  휴대폰 번호
-                </th>
-                <td
-                  style="
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: left;
-                  "
-                >
-                  010-1234-5678
-                </td>
+                <th>휴대폰 번호</th>
+                <td>010-1234-5678</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="con-box">
-          <p
-            class="tit"
-            style="
-              margin: 0 0 16px 0;
-              font-size: 16px;
-              font-weight: 700;
-              line-height: 22px;
-              letter-spacing: -0.5px;
-            "
-          >
-            요금정보 [단위(원)]
-          </p>
+          <p class="tit" style="">요금정보 [단위(원)]</p>
 
-          <table style="margin: 0 0 42px 0; width: 100%; border-top: 2px solid #000">
+          <table>
             <colgroup>
               <col width="33.3333%" />
               <col width="33.3333%" />
               <col width="33.3333%" />
             </colgroup>
-            <caption
-              style="
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                margin: -1px;
-                clip: rect(0 0 0 0);
-                overflow: hidden;
-              "
-            >
+            <caption style="">
               해외 로밍 서비스 이용내역 청구내역의 요금정보 [단위(원)]
             </caption>
 
             <thead>
               <tr>
-                <th
-                  style="
-                    padding: 6px 0;
-                    color: #66707a;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  항목
-                </th>
-                <th
-                  style="
-                    padding: 6px 0;
-                    color: #66707a;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  금액
-                </th>
-                <th
-                  style="
-                    padding: 6px 0;
-                    color: #66707a;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  사용일수/건수/양
-                </th>
+                <th>항목</th>
+                <th>금액</th>
+                <th>사용일수/건수/양</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  국제발신
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  192원
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  2일/1건
-                </td>
+                <td>국제발신</td>
+                <td>192원</td>
+                <td>2일/1건</td>
               </tr>
 
               <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  SMS
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  1,567원
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  6건
-                </td>
+                <td>SMS</td>
+                <td>1,567원</td>
+                <td>6건</td>
               </tr>
 
               <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  로밍패스 3GB
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  23,560원
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  2일
-                </td>
+                <td>로밍패스 3GB</td>
+                <td>23,560원</td>
+                <td>2일</td>
               </tr>
 
               <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  부가세
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  2,356원
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  -
-                </td>
+                <td>부가세</td>
+                <td>2,356원</td>
+                <td>-</td>
               </tr>
 
               <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  총 사용금액
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                >
-                  33,420원
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 14px;
-                    font-weight: 700;
-                    line-height: 20px;
-                    letter-spacing: -0.5px;
-                    text-align: center;
-                    border-bottom: 1px solid #dce0e5;
-                  "
-                ></td>
+                <td>총 사용금액</td>
+                <td>33,420원</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -489,7 +243,7 @@
               color: #66707a;
             "
           >
-            상기 ‘로밍 이용 내역’의 금액과 최종 청구금액은 다를 수 있습니다
+            상기 ‘로밍 이용 내역’의 금액과 최종 청구금액은 다를 수 있습니다
           </p>
           <p
             class="txt"
@@ -502,8 +256,8 @@
               color: #66707a;
             "
           >
-            서비스 이용요금은 해외 사업자의 과금 자료를 기준으로 부과되므로 서비스 이용 후 1~2개월
-            후에 청구될 수 있으며, 이용 기간에 따라 분할 청구될 수 있습니다.
+            서비스 이용요금은 해외 사업자의 과금 자료를 기준으로 부과되므로 서비스 이용 후 1~2개월
+            후에 청구될 수 있으며, 이용 기간에 따라 분할 청구될 수 있습니다.
           </p>
         </div>
 
